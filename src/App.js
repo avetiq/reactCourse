@@ -1,5 +1,6 @@
 import './App.css';
 import Address from './Address';
+import Product from './Product';
 import {Title} from './Title';
 
 function App() {
@@ -13,6 +14,8 @@ function App() {
         city='Yerevan'
         country='Armenia'
         />
+
+        <Product name='banabas' price='1$' description='Fresh bananas from Ecuador' />
       </header>
     </div>
   );
