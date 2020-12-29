@@ -14,7 +14,9 @@ class Product extends React.Component{
     render(){
         return(
             <div>
+            <p>
             <Price price={this.props.price}/>
+            </p>
             <Name name={this.props.name}/>
             <Description description={this.props.description}/>
             </div>
@@ -22,4 +24,4 @@ class Product extends React.Component{
     }
 }
 
-export default Product;
+export default Product; 
