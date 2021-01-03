@@ -7,16 +7,11 @@ import Description from './Description';
 //and will try to find into it Price named folder 
 
 class Product extends React.Component{
-    constructor(props){
-        super(props);
-    }
 
     render(){
         return(
             <div>
-            <p>
             <Price price={this.props.price}/>
-            </p>
             <Name name={this.props.name}/>
             <Description description={this.props.description}/>
             </div>

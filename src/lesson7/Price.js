@@ -30,7 +30,6 @@ class Price extends React.Component{
     }
 
     render(){
-        console.log(this.state)
         return(
             <div>
             <p>{this.state.price} {this.state.currency}</p>
