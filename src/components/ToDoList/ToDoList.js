@@ -61,6 +61,11 @@ class ToDoList extends React.Component {
                     {tasks.map((el) => (
                         <Col key={el.id} lg={3}>
                             <div className={styles.centerTaskDiv}>
+                                <div>
+                                <input
+                                type="checkbox"
+                                checked={this.state.isGoing} />
+                            </div>
                                 <div className={styles.taskDiv}>
                                     <h3>{el.title}</h3>
                                     <Button
