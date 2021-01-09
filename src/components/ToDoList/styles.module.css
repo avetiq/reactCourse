@@ -1,0 +1,15 @@
+.inputTaskName {
+    font-size: 18px;
+}
+
+.taskDiv {
+    display: block;
+    margin: 15px 0px;
+}
+
+.centerTaskDiv {
+    display: flex;
+    margin: 35px 0px;
+    justify-content: center;
+    border: 1px solid;
+}

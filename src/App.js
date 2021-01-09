@@ -1,18 +1,13 @@
-import './App.css';
-import Product from './lesson7/Product';
-import ToDoList from './lesson8/ToDoList';
-
+import ToDoList from './components/ToDoList/ToDoList';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './style.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Product name='banabas' price={1} description='Fresh bananas from Ecuador' />
-        <div> 
+    <div>
+        <div className="mainDiv"> 
           <ToDoList /> 
-        </div>
-      </header>
-      
+        </div>      
     </div>
   );
 }
