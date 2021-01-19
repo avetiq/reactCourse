@@ -13,3 +13,7 @@
     justify-content: space-between;
     border: 1px solid;
 }
+
+.deleteMulitpleButton{
+    margin-left: auto;
+}

@@ -7,7 +7,8 @@ class ToDoList extends React.Component {
 
     state = {
         tasks: [],
-        curInputValue: ''
+        curInputValue: '',
+        checkedTasks: new Set()
     };
 
     handleChange = (e) => {
@@ -38,22 +39,72 @@ class ToDoList extends React.Component {
         });
     };
 
+    deleteMultipleTasks = () => {
+        const {checkedTasks, tasks} = this.state;
+        const newTasks = tasks.filter((el) => {
+            return !(checkedTasks.has(el.id));
+        });
+        
+        this.setState({
+            tasks: newTasks,
+            checkedTasks: new Set()
+        });
+    };
+
+    clickedCheck = (taskId) => {
+        const {checkedTasks} = this.state;
+        const newCheckedTasks = new Set(checkedTasks);
+        if(newCheckedTasks.has(taskId)){
+            newCheckedTasks.delete(taskId);
+        }else{
+            newCheckedTasks.add(taskId);
+        }
+
+        this.setState({
+            checkedTasks: newCheckedTasks,
+        });
+
+    };
+
+    handleEnter = (event) => {
+        if(event.key === "Enter"){
+            this.handleClick();
+        }
+    }
+
     render() {
         const { tasks, curInputValue } = this.state;
         return (
             <Container>
                 <Row>
+                    <div>
                     <input
                         type='text'
                         onChange={this.handleChange}
                         value={curInputValue}
                         className={styles.inputTaskName}
+                        // onKeyDown={(e) => {
+                        //     if(e.key === "Enter"){
+                        //         this.handleClick();
+                        //     }
+                        // }}
+                        onKeyDown={this.handleEnter}
                     />
                     <Button
                         variant="success"
                         onClick={this.handleClick}
+                        disabled={this.state.checkedTasks.size !== 0}
                     >
                         Submit
+                    </Button>
+                    </div>
+                    <Button
+                        className={styles.deleteMulitpleButton}
+                        variant="danger"
+                        onClick={this.deleteMultipleTasks}
+                        disabled={this.state.checkedTasks.size === 0}
+                    >
+                        Delete Multiple Tasks
                     </Button>
                 </Row>
                 <Row>
@@ -64,13 +115,15 @@ class ToDoList extends React.Component {
                                 <div>
                                 <input
                                 type="checkbox"
-                                checked={this.state.isGoing} />
+                                onChange={()=>{this.clickedCheck(el.id)}}
+                                />
                             </div>
                                 <div className={styles.taskDiv}>
                                     <h3>{el.title}</h3>
                                     <Button
                                         variant="danger"
                                         onClick={() => this.deleteTask(el.id)}
+                                        disabled={this.state.checkedTasks.size !== 0}
                                     >
                                         Delete
                                     </Button>

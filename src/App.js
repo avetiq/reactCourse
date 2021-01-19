@@ -1,4 +1,4 @@
-import ToDoList from './components/ToDoList/ToDoList';
+import ToDoList from './components/ToDoList';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
