@@ -1,7 +1,8 @@
 import React from 'react';
-import { Container, Row, Button, Col } from 'react-bootstrap';
+import { Container, Row, Button, Col} from 'react-bootstrap';
 import styles from './styles.module.css';
 import idGenerator from '../../helpers/idGenerator';
+import Task from '../Task'
 
 class ToDoList extends React.Component {
 
@@ -108,31 +109,17 @@ class ToDoList extends React.Component {
                     </Button>
                 </Row>
                 <Row>
-
                     {tasks.map((el) => (
                         <Col key={el.id} lg={3}>
-                            <div className={styles.centerTaskDiv}>
-                                <div>
-                                <input
-                                type="checkbox"
-                                onChange={()=>{this.clickedCheck(el.id)}}
-                                />
-                            </div>
-                                <div className={styles.taskDiv}>
-                                    <h3>{el.title}</h3>
-                                    <Button
-                                        variant="danger"
-                                        onClick={() => this.deleteTask(el.id)}
-                                        disabled={this.state.checkedTasks.size !== 0}
-                                    >
-                                        Delete
-                                    </Button>
-                                </div>
-                            </div>
+                            <Task
+                                task={el}
+                                clickedCheck={this.clickedCheck}
+                                deleteTask={this.deleteTask}
+                                disabled={this.state.checkedTasks.size !== 0}
+                            />
                         </Col>
                     ))
                     }
-
                 </Row>
             </Container>
         );
