@@ -1,37 +1,22 @@
 import React from 'react';
 import { Container, Row, Button, Col} from 'react-bootstrap';
 import styles from './styles.module.css';
-import idGenerator from '../../helpers/idGenerator';
 import Task from '../Task'
+import NewTask from '../NewTask/';
 
 class ToDoList extends React.Component {
 
     state = {
         tasks: [],
-        curInputValue: '',
         checkedTasks: new Set()
     };
 
-    handleChange = (e) => {
-        this.setState({
-            curInputValue: e.target.value
-        });
-    };
 
-    handleClick = () => {
-        //if empty string wants to submit
-        if (this.state.curInputValue === '') {
-            return;
-        }
-        //else we add the task to out array
+    handleClick = (newTask) => {
         this.setState({
-            tasks: [...this.state.tasks, {
-                id: idGenerator(),
-                title: this.state.curInputValue
-            }],
-            curInputValue: ''
+            tasks: [...this.state.tasks, newTask]
         });
-    };
+    }
 
     deleteTask = (taskId) => {
         const newTasks = this.state.tasks.filter((el) => el.id !== taskId);
@@ -67,38 +52,17 @@ class ToDoList extends React.Component {
 
     };
 
-    handleEnter = (event) => {
-        if(event.key === "Enter"){
-            this.handleClick();
-        }
-    }
+    
 
     render() {
-        const { tasks, curInputValue } = this.state;
+        const { tasks, } = this.state;
         return (
             <Container>
                 <Row>
-                    <div>
-                    <input
-                        type='text'
-                        onChange={this.handleChange}
-                        value={curInputValue}
-                        className={styles.inputTaskName}
-                        // onKeyDown={(e) => {
-                        //     if(e.key === "Enter"){
-                        //         this.handleClick();
-                        //     }
-                        // }}
-                        onKeyDown={this.handleEnter}
-                    />
-                    <Button
-                        variant="success"
-                        onClick={this.handleClick}
+                    <NewTask 
+                        handleClick={this.handleClick}
                         disabled={this.state.checkedTasks.size !== 0}
-                    >
-                        Submit
-                    </Button>
-                    </div>
+                    />
                     <Button
                         className={styles.deleteMulitpleButton}
                         variant="danger"
